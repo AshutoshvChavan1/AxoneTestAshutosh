@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AshutoshTest.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees Index";
+}
+
+<h1>Employees</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Short Name</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Languages Known</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.EmployeeId</td>
+                <td>@employee.EmployeeName</td>
+                <td>@employee.ShortName</td>
+                <td>@employee.DateOfBirth.ToShortDateString()</td>
+                <td>@employee.Gender</td>
+                <td>
+                    @if (employee.EnglishKnown)
+                    {
+                        <span>English</span>
+                    }
+                    @if (employee.HindiKnown)
+                    {
+                        <span>Hindi</span>
+                    }
+                    @if (employee.GujaratiKnown)
+                    {
+                        <span>Gujarati</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@employee.EmployeeId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@employee.EmployeeId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
